@@ -15,6 +15,9 @@ import com.rbros.oauth2.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Security 에서 인증 객체로 사용할 클래스
+ */
 @Getter
 public class UserPrincipal implements OAuth2User, UserDetails {
     private Long id;

@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.util.SerializationUtils;
 
+/**
+ * 쿠키 저장, 삭제를 담당하는 클래스
+ *
+ */
 public class CookieUtils {
 	 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
@@ -31,6 +35,7 @@ public class CookieUtils {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(maxAge);
         response.addCookie(cookie);
+        
     }
  
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {

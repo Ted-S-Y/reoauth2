@@ -15,18 +15,18 @@ public class AppProperties {
     private final OAuth2 oauth2 = new OAuth2();
  
     /**
-     * JWT ÅäÅ«ÀÇ ¾ÏÈ£Å°¿Í, ¸¸·á±â°£À» ¼³Á¤ÇÒ ¶§ »ç¿ë
+     * JWT í† í°ì˜ ì•”í˜¸í‚¤ì™€, ë§Œë£Œê¸°ê°„ì„ ì„¤ì •í•  ë•Œ ì‚¬ìš©
      *
      */
     @Getter
     @Setter
     public static class Auth {
-        private String tokenSecret;
-        private long tokenExpirationMsec;
+        private String tokenSecret;    		// JWT í† í°ì˜ ì•”í˜¸í‚¤
+        private long tokenExpirationMsec;	// ë§Œë£Œê¸°ê°„
     }
  
     /**
-     * ÇÁ·ĞÆ® ¿£µå Å¬¶óÀÌ¾ğÆ®°¡ /oauth2/authorize ¿äÃ»¿¡¼­ ÁöÁ¤ÇÑ redirectUri ÀÔ´Ï´Ù
+     * í”„ë¡ íŠ¸ ì—”ë“œ í´ë¼ì´ì–¸íŠ¸ê°€ /oauth2/authorize ìš”ì²­ì—ì„œ ì§€ì •í•œ redirectUri
      *
      */
     @Getter

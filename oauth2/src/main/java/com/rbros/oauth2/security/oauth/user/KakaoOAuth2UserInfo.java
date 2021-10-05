@@ -7,13 +7,13 @@ import java.util.Map;
  *  id=11111111,
  *  connected_at=2021-08-14T14:02:42Z,
  *  properties={
- *     nickname=´Ğ³×ÀÓ
+ *     nickname=ë‹‰ë„¤ì„
  *  },
  *  kakao_account={
  *     profile_nickname_needs_agreement=false,
  *     profile_image_needs_agreement=false,
  *     profile={
- *         nickname=´Ğ³×ÀÓ,
+ *         nickname=ë‹‰ë„¤ì„,
  *         thumbnail_image_url=xxx.jpg,
  *         profile_image_url=xxx.jpg,
  *         is_default_image=true
@@ -28,7 +28,7 @@ import java.util.Map;
  * */
 public class KakaoOAuth2UserInfo extends OAuth2UserInfo{
  
-    /** Ä«Ä«¿À´Â Integer ·Î ¹Ş¾ÆÁ®¼­ ±×·±Áö (String) ¶Ç´Â (Long) À¸·Î cascading ÀÌ µÇÁö ¾Ê´Â´Ù... ±×·¡¼­ Integer ·Î ¹Ş¾ÆÁØ´Ù */
+    /** ì¹´ì¹´ì˜¤ëŠ” Integer ë¡œ ë°›ì•„ì ¸ì„œ ê·¸ëŸ°ì§€ (String) ë˜ëŠ” (Long) ìœ¼ë¡œ cascading ì´ ë˜ì§€ ì•ŠëŠ”ë‹¤... ê·¸ë˜ì„œ Integer ë¡œ ë°›ì•„ì¤€ë‹¤ */
     private Integer id;
  
     public KakaoOAuth2UserInfo(Map<String, Object> attributes) {

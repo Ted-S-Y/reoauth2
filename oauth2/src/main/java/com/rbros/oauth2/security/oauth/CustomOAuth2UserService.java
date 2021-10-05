@@ -20,6 +20,12 @@ import com.rbros.oauth2.security.UserPrincipal;
 import com.rbros.oauth2.security.oauth.user.OAuth2UserInfo;
 import com.rbros.oauth2.security.oauth.user.OAuth2UserInfoFactory;
 
+/**
+ * Spring OAuth2 ì—ì„œ ì œê³µí•˜ëŠ” OAuth2User ì„ ê°€ê³µí•˜ì—¬ OAuth2UserInfo ë¡œ ë§Œë“¤ê³  
+ * OAuth2UserInfo ì— Email ì´ ìˆëŠ”ì§€ ê²€ì‚¬ì™€, A ë¼ëŠ” í”Œë«í¼ìœ¼ë¡œ ê°€ì…ì´ ë˜ì–´ìˆëŠ”ë°, 
+ * B í”Œë«í¼ìœ¼ë¡œ ê°€ì… í•˜ë ¤ëŠ” ê²½ìš° ê²€ì‚¬ë¥¼ ì§„í–‰í•˜ë©°, ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê³„ì •ì— ê²½ìš°ì—ëŠ” Update ë¥¼ ì§„í–‰í•˜ê³ ,
+ * ì—†ëŠ” ê²½ìš°ì—ëŠ” ìƒˆë¡œ Insert í•˜ë©°, UserPrincipal ì„ ë¦¬í„´í•œë‹¤
+ */
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
  
@@ -53,14 +59,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
         User user;
  
-        // ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì
+        // ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê²½ìš°
         if(userOptional.isPresent()) {
             user = userOptional.get();
  
-            // °¡Á®¿Â À¯ÀúÀÇ °ø±ŞÀÚ¸í°ú ³Ñ¾î¿Â °ø±ŞÀÚ¸íÀÌ ´Ù¸¥ °æ¿ì
+            // ê°€ì ¸ì˜¨ ìœ ì €ì˜ ê³µê¸‰ìëª…ê³¼ ë„˜ì–´ì˜¨ ê³µê¸‰ìëª…ì´ ë‹¤ë¥¸ ê²½ìš°
             if(!user.getProvider().equals(AuthProvider.valueOf(registrationId))) {
  
-                // ÀÌ¹Ì ´Ù¸¥ °ø±ŞÀÚ°¡ Á¸ÀçÇÏ±â ¶§¹®¿¡ °¡ÀÔÇÒ ¼ö ¾ø´Ù
+                // ì´ë¯¸ ë‹¤ë¥¸ ê³µê¸‰ìê°€ ì¡´ì¬í•˜ê¸° ë•Œë¬¸ì— ê°€ì…í•  ìˆ˜ ì—†ë‹¤
                 throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
                         user.getProvider() + " account. Please use your " + user.getProvider() +
                         " account to login.");

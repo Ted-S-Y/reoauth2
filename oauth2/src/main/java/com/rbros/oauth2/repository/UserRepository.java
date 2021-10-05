@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.rbros.oauth2.entity.User;
 
+/**
+ * DAO (Data Access Object) 클래스
+ * 
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
  

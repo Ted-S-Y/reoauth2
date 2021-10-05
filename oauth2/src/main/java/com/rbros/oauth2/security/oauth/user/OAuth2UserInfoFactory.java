@@ -5,6 +5,10 @@ import java.util.Map;
 import com.rbros.oauth2.entity.AuthProvider;
 import com.rbros.oauth2.exception.OAuth2AuthenticationProcessingException;
 
+/**
+ * 각 플랫폼 클래스를 생성하기 위한 Factory 패턴을 사용한 클래스
+ * 
+ */
 public class OAuth2UserInfoFactory {
 	 
     public static OAuth2UserInfo getOAuth2UserInfo(String registrationId, Map<String, Object> attributes) {

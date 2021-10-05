@@ -10,13 +10,20 @@ import org.springframework.stereotype.Component;
 
 import com.rbros.oauth2.security.util.CookieUtils;
 
+/**
+ * OAuth2 í”„ë¡œí† ì½œì€ CSRF ê³µê²©ì„ ë°©ì§€í•˜ê¸° ìœ„í•´ state ë§¤ê°œ ë³€ìˆ˜ ì‚¬ìš©ì„ ê¶Œì¥í•©ë‹ˆë‹¤. ì¸ì¦ ì¤‘ì— ì• í”Œë¦¬ì¼€ì´ì…˜ì€ ì¸ì¦ ìš”ì²­ì—ì„œ ì´ ë§¤ê°œ ë³€ìˆ˜ë¥¼ ì „ì†¡í•˜ê³ , OAuth2 ê³µê¸‰ìëŠ” OAuth2 ì½œë°±ì—ì„œ ë³€ê²½ë˜ì§€ ì•Šì€ ì´ ë§¤ê°œ ë³€ìˆ˜ë¥¼ ë¦¬í„´í•©ë‹ˆë‹¤.
+ * ì‘ìš© í”„ë¡œê·¸ë¨ì€ OAuth2 ê³µê¸‰ìì—ì„œ ë°˜í™˜ ëœ state ë§¤ê°œ ë³€ìˆ˜ì˜ ê°’ì„ ì´ˆê¸°ì— ë³´ë‚¸ ê°’ê³¼ ë¹„êµí•©ë‹ˆë‹¤. ì¼ì¹˜í•˜ì§€ ì•Šìœ¼ë©´ ì¸ì¦ ìš”ì²­ì„ ê±°ë¶€í•©ë‹ˆë‹¤.
+ * ì´ íë¦„ì„ ì–»ìœ¼ë ¤ë©´ ì• í”Œë¦¬ì¼€ì´ì…˜ì´ ë‚˜ì¤‘ì— OAuth2 ê³µê¸‰ìì—ì„œ ë°˜í™˜ëœ ìƒíƒœì™€ ë¹„êµí•  ìˆ˜ ìˆë„ë¡ state ë§¤ê°œ ë³€ìˆ˜ë¥¼ ì–´ë”˜ê°€ì— ì €ì¥í•´ì•¼í•©ë‹ˆë‹¤.
+ * ë‹¨ê¸°(short-lived) ì¿ í‚¤ì— ìƒíƒœì™€ redirect_urië¥¼ ì €ì¥í•  ê²ƒì…ë‹ˆë‹¤. ë‹¤ìŒ í´ë˜ìŠ¤ëŠ” ì¸ì¦ ìš”ì²­ì„ ì¿ í‚¤ì— ì €ì¥í•˜ê³  ê²€ìƒ‰í•˜ëŠ” ê¸°ëŠ¥ì„ ì œê³µí•©ë‹ˆë‹¤. 
+ * - ì¶œì²˜ http://yoonbumtae.com/?p=3000
+ */
 @Component
 public class HttpCookieOAuth2AuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
     public static final String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";
     public static final String REDIRECT_URI_PARAM_COOKIE_NAME = "redirect_uri";
     private static final int cookieExpireSeconds = 180;
  
-    /** cookie ¿¡ ÀúÀåµÇ¾îÀÖ´ø authorizationRequest µéÀ» °¡Á®¿Â´Ù authorizationUri, authorizationGrantType, responseType, clientId, redirectUri, scopes, additionalParameters */
+    /** cookie ì— ì €ì¥ë˜ì–´ìˆë˜ authorizationRequest ë“¤ì„ ê°€ì ¸ì˜¨ë‹¤ authorizationUri, authorizationGrantType, responseType, clientId, redirectUri, scopes, additionalParameters */
     @Override
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
         return CookieUtils.getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
@@ -24,7 +31,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
                 .orElse(null);
     }
  
-    /** ÇÃ·§ÆûÀ¸·Î º¸³»±â À§ÇÑ Request ¸¦ `oauth2_auth_request` ¶ó´Â  cookie ¿¡ ÀúÀå ÇÑ´Ù authorizationUri, authorizationGrantType, responseType, clientId, redirectUri, scopes, additionalParameters */
+    /** í”Œë«í¼ìœ¼ë¡œ ë³´ë‚´ê¸° ìœ„í•œ Request ë¥¼ `oauth2_auth_request` ë¼ëŠ”  cookie ì— ì €ì¥ í•œë‹¤ authorizationUri, authorizationGrantType, responseType, clientId, redirectUri, scopes, additionalParameters */
     @Override
     public void saveAuthorizationRequest(OAuth2AuthorizationRequest authorizationRequest, HttpServletRequest request, HttpServletResponse response) {
         if (authorizationRequest == null) {
@@ -35,9 +42,9 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
         CookieUtils.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, CookieUtils.serialize(authorizationRequest), cookieExpireSeconds);
  
         /*
-         * http://localhost:8080/oauth2/authorize/naver?redirect_uri=http://localhost:3000/oauth/redirect ·Î ¿äÃ» ¹Ş¾ÒÀ» ¶§
-         * http://localhost:3000/oauth/redirect ¸¦ °¡Á®¿Â´Ù
-         * ±×¸®°í Á¸ÀçÇÏ´Â °æ¿ì cookie ¿¡ ³Ö¾îÁØ´Ù
+         * http://localhost:8080/oauth2/authorize/naver?redirect_uri=http://localhost:3000/oauth/redirect ë¡œ ìš”ì²­ ë°›ì•˜ì„ ë•Œ
+         * http://localhost:3000/oauth/redirect ë¥¼ ê°€ì ¸ì˜¨ë‹¤
+         * ê·¸ë¦¬ê³  ì¡´ì¬í•˜ëŠ” ê²½ìš° cookie ì— ë„£ì–´ì¤€ë‹¤
          */
         String redirectUriAfterLogin = request.getParameter(REDIRECT_URI_PARAM_COOKIE_NAME);
         if (StringUtils.isNotBlank(redirectUriAfterLogin)) {
@@ -45,19 +52,18 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
         }
     }
  
-    /** remove ¸¦ ÀçÁ¤ÀÇ ÇØ¼­ cookie ¸¦ °¡Á®¿À°í remove ´Â successHandler ¶Ç´Â failureHandler ¿¡¼­ ÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù */
+    /** remove ë¥¼ ì¬ì •ì˜ í•´ì„œ cookie ë¥¼ ê°€ì ¸ì˜¤ê³  remove ëŠ” successHandler ë˜ëŠ” failureHandler ì—ì„œ í•  ìˆ˜ ìˆë„ë¡ í•œë‹¤ */
     @Override
     public OAuth2AuthorizationRequest removeAuthorizationRequest(HttpServletRequest request) {
         return this.loadAuthorizationRequest(request);
     }
  
     /**
-     * »ç¿ëÀÚ Á¤º¸¸¦ ´Ù °¡Áö°í ¿Â µÚ ÀÌÁ¦ ¸®´ÙÀÌ·ºÆ®¸¦ ÇÏ¸é ±âÁ¸¿¡ ³²¾ÆÀÖ´ø ÄíÅ°µéÀ» Á¦°ÅÇØÁÖ±â À§ÇØ »ç¿ëµÈ´Ù
-     *  OAuth2AuthorizationRequest ¿Í Å¬¶óÀÌ¾ğÆ®¿¡¼­ ÆÄ¸®¹ÌÅÍ·Î ¿äÃ»ÇÑ redirect_uri °¡ µÈ´Ù
+     * ì‚¬ìš©ì ì •ë³´ë¥¼ ë‹¤ ê°€ì§€ê³  ì˜¨ ë’¤ ì´ì œ ë¦¬ë‹¤ì´ë ‰íŠ¸ë¥¼ í•˜ë©´ ê¸°ì¡´ì— ë‚¨ì•„ìˆë˜ ì¿ í‚¤ë“¤ì„ ì œê±°í•´ì£¼ê¸° ìœ„í•´ ì‚¬ìš©ëœë‹¤
+     *  OAuth2AuthorizationRequest ì™€ í´ë¼ì´ì–¸íŠ¸ì—ì„œ íŒŒë¦¬ë¯¸í„°ë¡œ ìš”ì²­í•œ redirect_uri ê°€ ëœë‹¤
      * */
     public void removeAuthorizationRequestCookies(HttpServletRequest request, HttpServletResponse response) {
         CookieUtils.deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
         CookieUtils.deleteCookie(request, response, REDIRECT_URI_PARAM_COOKIE_NAME);
     }
-    
 }

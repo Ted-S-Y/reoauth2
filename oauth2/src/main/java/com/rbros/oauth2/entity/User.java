@@ -19,6 +19,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * DB 의 User 테이블
+ *
+ */
 @Data
 @Entity
 @Table(name = "users", uniqueConstraints = {

@@ -7,15 +7,15 @@ import java.util.Map;
  *   resultcode=00,
  *   message=success,
  *   response={
- *     id=¾ÆÀÌµğ,
- *     profile_image=ÀÌ¹ÌÁöÁÖ¼Ò.png,
- *     email=ÀÌ¸ŞÀÏ, name=ÀÌ¸§
+ *     id=ì•„ì´ë””,
+ *     profile_image=ì´ë¯¸ì§€ì£¼ì†Œ.png,
+ *     email=ì´ë©”ì¼, name=ì´ë¦„
  *   }
  * }
  */
 public class NaverOAuth2UserInfo extends OAuth2UserInfo {
  
-    /** naver ´Â response ¾È¿¡ ´ã°ÜÁ®ÀÖ±â ¶§¹®¿¡ response ¸¦ ÇØÁØ´Ù */
+    /** naver ëŠ” response ì•ˆì— ë‹´ê²¨ì ¸ìˆê¸° ë•Œë¬¸ì— response ë¥¼ í•´ì¤€ë‹¤ */
     public NaverOAuth2UserInfo(Map<String, Object> attributes) {
         super((Map<String, Object>) attributes.get("response"));
     }

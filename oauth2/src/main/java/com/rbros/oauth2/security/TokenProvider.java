@@ -17,6 +17,10 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Json 웹 토큰을 생성하고 인증(verify)하는 코드가 포함
+ *
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor

@@ -12,6 +12,9 @@ import com.rbros.oauth2.entity.User;
 import com.rbros.oauth2.exception.ResourceNotFoundException;
 import com.rbros.oauth2.repository.UserRepository;
 
+/**
+ * TokenFilter 에서 DB 로 인증을 받기 위해 만들어진 Service 클래스
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
  

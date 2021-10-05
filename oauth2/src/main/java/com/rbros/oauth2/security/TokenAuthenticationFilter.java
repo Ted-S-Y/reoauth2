@@ -18,6 +18,11 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+ * 이 클래스는 request Header에서 Authorization 을 가져다가 JWT 인증 토큰을 읽어 인증(verify)하고, 
+ * 토큰이 유효한 경우 Spring Security의 SecurityContext를 설정하는 데 사용
+ *
+ */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	 
     @Autowired

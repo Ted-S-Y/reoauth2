@@ -7,15 +7,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
  
-    private final long MAX_AGE_SECS = 3600;	//  ÃÖ´ë 1½Ã°£ Çã¿ë
+    private final long MAX_AGE_SECS = 3600;	//  ìµœëŒ€ 1ì‹œê°„ í—ˆìš©
  
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-        .allowedOrigins("*")	// ¿ÜºÎ¿¡¼­ µé¾î¿À´Â ¸ğµç url µéÀ» Çã¿ëÇÑ´Ù (º¸ÅëÀº ÆÄÆ®³Ê ¶Ç´Â api ¸¦ »ç¿ëÇÏ´Â °÷¸¸ ¿­¾îµĞ´Ù)	http://www.naver.com/** , http://localhost:3000/** Ã³·³..
-        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")	// Çã¿ëµÇ´Â ¸Ş¼ÒµåµéÀ» Á¤ÀÇ ÇÑ´Ù
-        .allowedHeaders("*")	// Çã¿ëµÇ´Â Çì´õ¸¦ Á¤ÀÇÇÑ´Ù
-        .allowCredentials(true)	// ÀÚ°İÁõ¸íÀ» Çã¿ëÇÑ´Ù
+        .allowedOrigins("*")	// - allowedOrigins(*) : ì™¸ë¶€ì—ì„œ ë“¤ì–´ì˜¤ëŠ” ëª¨ë“  url ë“¤ì„ í—ˆìš© (ë³´í†µì€ íŒŒíŠ¸ë„ˆ ë˜ëŠ” api ë¥¼ ì‚¬ìš©í•˜ëŠ” ê³³ë§Œ ì—´ì–´ë‘”ë‹¤) http://www.naver.com/** , http://localhost:3000/** ì²˜ëŸ¼..
+        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")	// í—ˆìš©ë˜ëŠ” ë©”ì†Œë“œë“¤ì„ ì •ì˜
+        .allowedHeaders("*")	// í—ˆìš©ë˜ëŠ” í—¤ë”ë¥¼ ì •ì˜
+        .allowCredentials(true)	// ìê²©ì¦ëª…ì„ í—ˆìš©
         .maxAge(MAX_AGE_SECS);
     }
 }

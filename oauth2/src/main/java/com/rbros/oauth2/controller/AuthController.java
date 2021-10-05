@@ -27,6 +27,9 @@ import com.rbros.oauth2.payload.SignUpRequest;
 import com.rbros.oauth2.repository.UserRepository;
 import com.rbros.oauth2.security.TokenProvider;
 
+/**
+ * 서버에 이메일로 가입하기 위한 Auth Api
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

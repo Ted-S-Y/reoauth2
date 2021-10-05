@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * API응답을 반환하기 위한 DTO 클래스
+ *
+ */
 @Getter
 @Setter
 @AllArgsConstructor

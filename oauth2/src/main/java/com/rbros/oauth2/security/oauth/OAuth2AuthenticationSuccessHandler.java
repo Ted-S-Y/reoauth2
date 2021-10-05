@@ -21,6 +21,11 @@ import com.rbros.oauth2.security.util.CookieUtils;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * OAuth2 로그인 과정이 성공했을 때 처리하는 클래스
+ * -> http://localhost:3000/oauth2/redirect?token={jwt token}
+ * cf ) redirect_uri 가 없는 경우 기본으로 http://localhost:8080/?token={jwt token} 가 된다
+ */
 @Component
 @RequiredArgsConstructor
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
