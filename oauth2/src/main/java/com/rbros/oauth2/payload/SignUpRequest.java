@@ -1,6 +1,5 @@
 package com.rbros.oauth2.payload;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
@@ -15,10 +14,9 @@ public class SignUpRequest {
     private String name;
  
     @NotBlank
-    @Email
-    private String email;
+    private String mobile;
  
     @NotBlank
-    private String password;
+    private String password;	
 }
  

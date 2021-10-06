@@ -47,8 +47,8 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo{
     }
  
     @Override
-    public String getEmail() {
-        return (String) attributes.get("email");
+    public String getMobl() {
+        return (String) attributes.get("mobl");
     }
  
     @Override

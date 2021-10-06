@@ -14,7 +14,11 @@ import com.rbros.oauth2.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
  
-    Optional<User> findByEmail(String email);
+    Optional<User> findByMobile(String mobl);
  
-    Boolean existsByEmail(String email);
+    Boolean existsByMobile(String mobl);
+    
+    Optional<User> findByMobl(String mobl);
+    
+    Boolean existsByMobl(String mobl);
 }

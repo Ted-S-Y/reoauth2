@@ -25,8 +25,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email")
+@Table(name = "RBS001_MBR", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "id")
 })
 @NoArgsConstructor
 public class User {
@@ -35,19 +35,12 @@ public class User {
     private Long id;
  
     @Column(nullable = false)
-    private String name;
+    private String mbrNm;
  
-    @Email
     @Column(nullable = false)
-    private String email;
+    private String mobl;
  
     private String imageUrl;
- 
-    @Column(nullable = false)
-    private Boolean emailVerified = false;
- 
-    @JsonIgnore
-    private String password;
  
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -56,26 +49,16 @@ public class User {
     private String providerId;
  
     @Builder(builderClassName= "social", builderMethodName = "socialBuilder")
-    private User(String name, @Email String email, String imageUrl, @NotNull AuthProvider provider, String providerId) {
-        this.name = name;
-        this.email = email;
+    private User(String mbrNm, String mobl, String imageUrl, @NotNull AuthProvider provider, String providerId) {
+        this.mbrNm = mbrNm;
+        this.mobl = mobl;
         this.imageUrl = imageUrl;
         this.provider = provider;
         this.providerId = providerId;
     }
  
-    @Builder(builderClassName = "local",builderMethodName = "localBuilder")
-    public User(String name, @Email String email, String imageUrl, String password, @NotNull AuthProvider provider, String providerId) {
-        this.name = name;
-        this.email = email;
-        this.imageUrl = imageUrl;
-        this.password = password;
-        this.provider = provider;
-        this.providerId = providerId;
-    }
- 
-    public void updateNameAndImage(String name, String imageUrl) {
-        this.name = name;
+    public void updateNameAndImage(String mbrNm, String imageUrl) {
+    	this.mbrNm = mbrNm;
         this.imageUrl = imageUrl;
     }
 }

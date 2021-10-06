@@ -23,11 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
  
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email)
+    public UserDetails loadUserByUsername(String mobl)
             throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
+        User user = userRepository.findByMobl(mobl)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found with email : " + email)
+                        new UsernameNotFoundException("User not found with mobile : " + mobl)
         );
  
         return UserPrincipal.create(user);

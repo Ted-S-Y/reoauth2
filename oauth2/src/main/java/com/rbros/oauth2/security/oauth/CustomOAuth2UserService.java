@@ -52,11 +52,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
  
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, oAuth2User.getAttributes());
  
-        if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+        if(StringUtils.isEmpty(oAuth2UserInfo.getMobl())) {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
  
-        Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+        Optional<User> userOptional = userRepository.findByMobl(oAuth2UserInfo.getMobl());
         User user;
  
         // 이미 존재하는 경우
@@ -84,8 +84,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         User user = User.socialBuilder()
                 .provider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))
                 .providerId(oAuth2UserInfo.getId())
-                .name(oAuth2UserInfo.getName())
-                .email(oAuth2UserInfo.getEmail())
+                .mbrNm(oAuth2UserInfo.getName())
+                .mobl(oAuth2UserInfo.getMobl())
                 .imageUrl(oAuth2UserInfo.getImageUrl())
                 .build();
  
