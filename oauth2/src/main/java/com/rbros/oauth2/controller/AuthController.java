@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +39,8 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
  
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
  
     @Autowired
     private TokenProvider tokenProvider;
@@ -90,9 +89,11 @@ public class AuthController {
  
         User result = userRepository.save(user);
  
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/user/me")
-                .buildAndExpand(result.getId()).toUri();
+        URI location = ServletUriComponentsBuilder				
+                .fromCurrentContextPath()		// 사용자 요청 Uri
+                .path("/user/me")				// buildAndExpand를 통해 얻은 값이 들어오거나 일반 값 설정
+                .buildAndExpand(result.getId())	// 넣어줄값
+                .toUri();						// uri생성			
  
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "User registered successfully@"));
