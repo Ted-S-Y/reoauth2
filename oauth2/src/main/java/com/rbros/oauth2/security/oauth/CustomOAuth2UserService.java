@@ -32,6 +32,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Autowired
     private UserRepository userRepository;
  
+    /**
+     * 계정 불러오기 
+     */
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
@@ -46,6 +49,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
     }
  
+    /**
+     * 계정처리
+     * 
+     * @param oAuth2UserRequest
+     * @param oAuth2User
+     * @return
+     */
     private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
  
         final String registrationId = oAuth2UserRequest.getClientRegistration().getRegistrationId();
@@ -53,7 +63,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(registrationId, oAuth2User.getAttributes());
  
         if(StringUtils.isEmpty(oAuth2UserInfo.getMobl())) {
-            throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
+            throw new OAuth2AuthenticationProcessingException("Mobile not found from OAuth2 provider");
         }
  
         Optional<User> userOptional = userRepository.findByMobl(oAuth2UserInfo.getMobl());
@@ -73,12 +83,20 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             }
             user = updateExistingUser(user, oAuth2UserInfo);
         } else {
+        	// 존재하지 않으면 계정등록
             user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
         }
  
         return UserPrincipal.create(user, oAuth2User.getAttributes());
     }
  
+    /**
+     * 신규 계정 등록 
+     * 
+     * @param oAuth2UserRequest
+     * @param oAuth2UserInfo
+     * @return
+     */
     private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
  
         User user = User.socialBuilder()
@@ -92,6 +110,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         return userRepository.save(user);
     }
  
+    /**
+     * 계정 업데이트
+     * 
+     * @param existingUser
+     * @param oAuth2UserInfo
+     * @return
+     */
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.updateNameAndImage(oAuth2UserInfo.getName(), oAuth2UserInfo.getImageUrl());
         return userRepository.save(existingUser);

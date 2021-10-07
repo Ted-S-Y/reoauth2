@@ -113,7 +113,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                 															// -> http://localhost:8080/oauth2/callback/naver -> naver 는 registrationId 가 된다
 	                 .and()
 	             .userInfoEndpoint()
-	                 .userService(customOAuth2UserService)						// -> accessToken 을 가지고 플랫폼(네이버)에서 해당 유저에 대한 정보를 가져온다 (restTemplate 이용)
+	                 .userService(customOAuth2UserService)						// -> accessToken 을ㅈ 가지고 플랫폼(네이버)에서 해당 유저에 대한 정보를 가져온다 (restTemplate 이용)
 	                 															// -> userService 를 통해 가져온 정보를 가공한다
 	                 .and()
 	             .successHandler(oAuth2AuthenticationSuccessHandler)			// -> Client 에서 요청한 redirect_uri 파라미터가 서버 application.yml 에 authorizedRedirectUris 에 설정과 같은 지

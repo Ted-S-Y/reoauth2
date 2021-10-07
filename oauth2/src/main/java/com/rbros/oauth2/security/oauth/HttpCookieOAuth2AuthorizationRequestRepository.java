@@ -11,10 +11,13 @@ import org.springframework.stereotype.Component;
 import com.rbros.oauth2.security.util.CookieUtils;
 
 /**
- * OAuth2 프로토콜은 CSRF 공격을 방지하기 위해 state 매개 변수 사용을 권장합니다. 인증 중에 애플리케이션은 인증 요청에서 이 매개 변수를 전송하고, OAuth2 공급자는 OAuth2 콜백에서 변경되지 않은 이 매개 변수를 리턴합니다.
- * 응용 프로그램은 OAuth2 공급자에서 반환 된 state 매개 변수의 값을 초기에 보낸 값과 비교합니다. 일치하지 않으면 인증 요청을 거부합니다.
+ * OAuth2 프로토콜은 CSRF 공격을 방지하기 위해 state 매개 변수 사용을 권장합니다. 
+ * 인증 중에 애플리케이션은 인증 요청에서 이 매개 변수를 전송하고, OAuth2 공급자는 OAuth2 콜백에서 변경되지 않은 이 매개 변수를 리턴합니다.
+ * 응용 프로그램은 OAuth2 공급자에서 반환 된 state 매개 변수의 값을 초기에 보낸 값과 비교합니다. 
+ * 일치하지 않으면 인증 요청을 거부합니다.
  * 이 흐름을 얻으려면 애플리케이션이 나중에 OAuth2 공급자에서 반환된 상태와 비교할 수 있도록 state 매개 변수를 어딘가에 저장해야합니다.
- * 단기(short-lived) 쿠키에 상태와 redirect_uri를 저장할 것입니다. 다음 클래스는 인증 요청을 쿠키에 저장하고 검색하는 기능을 제공합니다. 
+ * 단기(short-lived) 쿠키에 상태와 redirect_uri를 저장할 것입니다. 
+ * 다음 클래스는 인증 요청을 쿠키에 저장하고 검색하는 기능을 제공합니다. 
  * - 출처 http://yoonbumtae.com/?p=3000
  */
 @Component
